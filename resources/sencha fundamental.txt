@@ -1,0 +1,61 @@
+Javascript fundamentals and the ExtJS Class System
+ 1. Library Consistency
+ 2. Javascrtip config  objects
+ 3. Ext object, the Singleton,
+    at javascript, singleto is Javascrit to keep from polluting Global namespace
+    at Extjs, ext is singleton, like $ in jquery
+    e.g. <div id="MyDivId">
+    jquery: var myValue = $("#MyDivId");
+    extjs:  Ext.Get("MyDivId") =>pass to Ext element 
+ 4. Extjs is class oriented
+    Ext.define("MyApp.Session",
+    {
+       config: //use config object
+         {
+           //define properties
+           title: ''
+         },
+         //define method
+        applyTitle: function(title) {
+           if (title === undefined) {
+             alert('title undefined');
+          }
+           return title;
+        },   
+          
+        //define constructor
+         constructor: function(config){
+           this.initConfig(config);
+         }
+     });
+     var session = Ext.create('MyApp.Session'),{
+      });
+     //extjs automatically create setter and getter
+     session.setTitle('peter awesome session');
+
+ 5. Extjs use markup way to define object
+    var session = {
+          title: "Pros and cons",  
+          id: 101
+    };
+ 6. ExtJS Utilities
+    Ext.util.TaskRunner.Task, http://docs.sencha.com/extjs/6.5.1/classic/Ext.util.TaskRunner.html
+    Ext.util.Format: 
+          columns: [{
+             dataIndex: 'date',
+             renderer: Ext.util.Format.dateRenderer('Y-m-d')
+           },
+    Ext.util.LocalStorage
+       var store = new Ext.util.LocalStorage({
+               id: 'foo'
+         });
+       store.setItem('bar','stuff')
+    //all these equivalent to:
+     window.localStorage.setItem('foo-bar','stuff');
+    Ext.util.HashMap: collection of key, value, unordered
+        var map = new Ext.util.HashMap; 
+        map.add('key1',1);
+        map.each(function(key,value,length){
+               console.log(key,value,length);
+        });
+  
